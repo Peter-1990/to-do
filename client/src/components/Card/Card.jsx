@@ -18,7 +18,8 @@ const Card = ({ allTask, getUserTask }) => {
       getUserTask();
     } catch (error) {
       console.log(error)
-      toast.error(error)
+      const errorMessage = error.response?.data?.message || "An error occurred";
+      toast.error(errorMessage);
     }
   }
 
@@ -26,9 +27,9 @@ const Card = ({ allTask, getUserTask }) => {
     <>
       <div className="card-container">
         {
-          allTask?.map((task, i) => (
+          allTask?.map((task) => (
             <>
-              <div className="card border-primary mb-3 mt-3" style={{ maxWidth: '18rem' }} key={i}>
+              <div className="card border-primary mb-3 mt-3" style={{ maxWidth: '18rem' }} key={task._id}>
                 <div className="card-header">
                   <div className="chead">
                     <h6>{task?.title.substring(0, 10)}</h6>

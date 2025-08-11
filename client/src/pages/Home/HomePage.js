@@ -76,7 +76,7 @@ const HomePage = () => {
 
         {/* ========== modal =========== */}
         <PopModal
-
+          
           showModal={showModal}
           setShowModal={setShowModal}
           title={title}
