@@ -27,6 +27,7 @@ app.use(morgan("dev"));
 app.use('/api/v1/user', require('./routes/userRoutes.js'));
 app.use('/api/v1/todo', require('./routes/todoRoutes.js'))
 
+app.get("/", (req, res) => res.send("API Working"));
 
 //port
 const PORT = process.env.PORT || 5000;
