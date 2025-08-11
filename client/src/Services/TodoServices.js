@@ -1,13 +1,17 @@
-import axios from 'axios'
+import axios from 'axios';
 
-//get user token
+// Get user token
 const user = JSON.parse(localStorage.getItem("todoapp"));
 
+// Default auth header
+if (user && user.token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
+} else {
+    // Optionally handle the case where the user is not logged in
+    console.warn("No user token found. Authorization header not set.");
+}
 
-//default auth header
-axios.defaults.headers.common["Authorization"] = `bearer ${user.token}`
-
-//create todo
+// Create todo
 const createTodo = (data) => {
     return axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/v1/todo/create`, data);
 };
@@ -18,13 +22,12 @@ const getAllTodo = (id) => {
     return axios.get(url);
 };
 
-
-//
+// Update todo
 const updateTodo = (id, data) => {
     return axios.patch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/todo/update/${id}`, data);
 };
 
-//delete todo
+// Delete todo
 const deleteTodo = (id) => {
     return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/v1/todo/delete/${id}`);
 };
